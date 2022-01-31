@@ -40,8 +40,6 @@ class DeviseCreateCustomers < ActiveRecord::Migration[5.2]
       t.string :address
       t.string :telephone_number
       t.boolean :is_active
-      t.datetime :created_at
-      t.datetime :updated_at
 
       t.timestamps null: false
     end

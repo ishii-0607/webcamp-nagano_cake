@@ -23,18 +23,40 @@
             <ul class="navbar-nav ml-auto">
             <% if customer_signed_in? %>
             <li class="nav-item">
-              <a>マイページ</a>
+              <%= link_to "マイページ", mypage_path, class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <a></a>
+              <p>商品一覧</p>
             </li>
             <li class="nav-item">
-              <a></a>
+              <p>カート</p>
             </li>
             <li class="nav-item">
               <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %>
             </li>
+            <% elsif admin_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "商品一覧", admin_items_path, class: 'nav-link text-dark' %>
+            </li>
+            <li class="nav-item">
+              <p>会員一覧</p>
+            </li>
+            <li class="nav-item">
+              <p>注文履歴一覧</p>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link text-dark' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+            </li>
             <% else %>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: 'nav-item text-dark' %>
+            </li>
+            <li class="nav-item">
+              <p>商品一覧</p>
+            </li>
             <li class="nav-item">
               <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark' %>
             </li>

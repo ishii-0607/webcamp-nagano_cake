@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="roe">
+    <div class="mx-auto">
+      <h3>商品一覧</h3>
+      <%= link_to '商品追加', new_admin_item_path %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>税抜価格</th>
+            <th>ジャンル</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+          <tr>
+            <td>
+              <p><%= item.id %></p>
+            </td>
+            <td>
+              <%= link_to admin_item_path(item.id) do %>
+                <p><%= item.name %></p>
+              <% end %>
+            </td>
+            <td>
+              <p><%= item.price %></p>
+            </td>
+            <td>
+              <p><%= item.genre_id %></p>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
