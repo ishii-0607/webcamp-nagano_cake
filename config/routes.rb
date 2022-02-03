@@ -2,9 +2,13 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :items, only: [:index, :show]
-    resource :customers, only: [:edit, :update, :withdrow, :change]
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+    resource :customers, only: [:edit, :update]
     get 'customers/mypage', to: 'customers#show', as: 'mypage'
+    get 'customers/withdraw', to: 'customers#withdraw', as: 'confirm_withdraw'
+    patch 'customers/change', to: 'customers#change', as: 'change_customers'
   end
+
 
   devise_for :admin, skip: [:registrations, :passwords] , controllers: {
     sessions: 'admin/sessions'
@@ -22,6 +26,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :edit, :update, :create, :show]
+    resources :customers, only: [:index, :show, :edit, :update]
   end
 
 
