@@ -4,11 +4,9 @@ class Public::ItemsController < ApplicationController
     @items = Item.page(params[:page]).reverse_order
   end
 
-  def create
-  end
-
   def show
     @item = Item.find(params[:id])
+    @cart_item_new = CartItem.new
   end
 
   private
