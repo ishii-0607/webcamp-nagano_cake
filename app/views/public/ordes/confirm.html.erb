@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <h3>注文情報確認</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+          <tr>
+            <th>送料</th>
+            <th>商品合計</th>
+            <th>請求金額</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @total_money = 0 %>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td>
+                <%= attachment_image_tag cart_item.item, :image, size: "100x50" %>
+                <%= cart_item.item.name %>
+              </td>
+              <td><%= cart_item.item.with_tax_price %></td>
+              <td><%= cart_item.amount %></td>
+              <td><%= cart_item.subtotal %></td>
+            </tr>
+            <% @total_money += cart_item.subtotal %>
+          <% end %>
+          <% @sam = @total_money + @orde.shipping_cost %>
+          <tr>
+            <td><%= @orde.shipping_cost %></td>
+            <td><%= @total_money %></td>
+            <td><%= @sam %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <label>支払方法</label>
+        <%= @orde.payment_i18n %>
+      </div>
+      <div>
+        <label>お届け先</label>
+        〒<%= @orde.postal_code %>
+        <%= @orde.address %>
+        <%= @orde.name %>
+      </div>
+      <%= form_with model: @orde, url: ordes_path, local:true do |f| %>
+        <%= f.hidden_field :payment, value: @orde.payment %>
+        <%= f.hidden_field :postal_code, value: @orde.postal_code %>
+        <%= f.hidden_field :address, value: @orde.address %>
+        <%= f.hidden_field :name, value: @orde.name %>
+        <%= f.submit "注文を確定する", class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+      <div class="mx-auto">
+      <h2>注文情報入力</h2>
+      <%= form_with model: @orde, url: ordes_confirm_path, local: true do |f| %>
+      <div>
+        <label>支払方法</label>
+        <div>
+          <%= f.radio_button :payment, "credit_card" %>
+          <%= f.label :payment, "クレジットカード" %>
+        </div>
+        <div>
+          <%= f.radio_button :payment, "transfer" %>
+          <%= f.label :payment, "銀行振込" %>
+        </div>
+      </div>
+      <tr>
+        <label>お届け先</label>
+        <div>
+          <%= f.radio_button :address_method, "address" %>
+          <%= f.label :address_method, "ご自身の住所" %>
+          <p><%= @customer.address_customer %></p>
+        </div>
+      </tr>
+      <div>
+        <%= f.radio_button :address_method, "new_address" %>
+        <%= f.label :address_method, "新しいお届け先" %>
+        <div>
+          <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
+          <%= f.text_field :postal_code %>
+        </div>
+        <div>
+          <%= f.label :address, "住所" %>
+          <%= f.text_field :address %>
+        </div>
+        <div>
+          <%= f.label :name, "宛名" %>
+          <%= f.text_field :name %>
+        </div>
+      </div>
+      <tr>
+        <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+      </tr>
+      <% end %>
+      </div>
+  </div>
+</div>

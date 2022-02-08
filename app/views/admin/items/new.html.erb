@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <h3 class="page-tatle">商品新規登録</h3>
+      <%= form_with model: @item, url: admin_items_path, method: :post, local: true do |f| %>
+      <div class="row">
+        <%= f.label :商品画像, class: "col-lg-3" %>
+        <%= f.attachment_field :image, class: "col-lg-9" %>
+      </div>
+      <p></p>
+      <div class="row">
+        <%= f.label :商品名, class: "col-lg-3" %>
+        <%= f.text_field :name, class: "col-lg-9" %>
+      </div>
+      <p></p>
+      <div class="row">
+        <%= f.label :商品説明, class: "col-lg-3" %>
+        <%= f.text_area :introduction, class: "col-lg-9" %>
+      </div>
+      <p></p>
+      <div class="row">
+        <%= f.label :ジャンル, class: "col-lg-3" %>
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: '--選択してください--', class: "col-lg-9" %>
+      </div>
+      <p></p>
+      <div class="row">
+        <%= f.label :税抜価格, class: "col-lg-3" %>
+        <%= f.text_field :price, class: "col-lg-8" %>円
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="col-lg-4"></div>
+        <%= f.submit '新規登録', class: "btn btn-success col-lg-4" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

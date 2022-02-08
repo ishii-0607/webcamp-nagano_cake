@@ -1,0 +1,12 @@
+ja:
+  enums:
+    orde:
+      payment:
+        credit_card: 'クレジットカード'
+        transfer: '銀行振込'
+  views:
+    pagination:
+      first: "≪ First"
+      previous: "< Previous"
+      next: "Next >"
+      last: "Last ≫"
