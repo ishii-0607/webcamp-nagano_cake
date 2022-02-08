@@ -1,0 +1,61 @@
+<div class="container">
+  <h3 class="page-tatle">注文履歴詳細</h3>
+  <div class="row">
+    <div class="col-3">
+      <p>購入者</p>
+      <p>注文日</p>
+      <p>配送先</p>
+      <p>支払方法</p>
+    </div>
+    <div class="col-9">
+      <p><%= @orde.name %></p>
+      <p><%= @orde.created_at.strftime('%Y/%m/%d') %></p>
+      <p>
+        〒<%= @orde.postal_code %>
+        <%= @orde.address %>
+        <%= @orde.name %>
+      </p>
+      <p><%= @orde.payment_i18n %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-9">
+      <table class="table">
+        <thead class="table-secondary">
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @orde.orders_details.each do |detail| %>
+            <td><%= detail.item.name %></td>
+            <td><%= detail.item.with_tax_price %></td>
+            <td><%= detail.amount %></td>
+            <td><%= detail.item.with_tax_price * detail.amount %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3">
+      <table class="table table-bordered">
+        <tr>
+          <th>商品合計</th>
+          <td><%= @orde.total_payment - @orde.shipping_cost %></td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td><%= @orde.shipping_cost %></td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th>
+          <td><%= @orde.total_payment %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
