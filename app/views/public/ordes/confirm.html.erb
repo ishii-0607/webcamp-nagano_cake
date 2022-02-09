@@ -1,19 +1,14 @@
 <div class="container">
+  <h3 class="page-tatle">注文情報確認</h3>
   <div class="row">
-    <div class="mx-auto">
-      <h3>注文情報確認</h3>
-      <table class="table">
-        <thead>
+    <div class="col-8">
+      <table class="table table-bordered">
+        <thead class="table-secondary">
           <tr>
             <th>商品名</th>
             <th>単価(税込)</th>
             <th>数量</th>
             <th>小計</th>
-          </tr>
-          <tr>
-            <th>送料</th>
-            <th>商品合計</th>
-            <th>請求金額</th>
           </tr>
         </thead>
         <tbody>
@@ -31,30 +26,50 @@
             <% @total_money += cart_item.subtotal %>
           <% end %>
           <% @sam = @total_money + @orde.shipping_cost %>
-          <tr>
-            <td><%= @orde.shipping_cost %></td>
-            <td><%= @total_money %></td>
-            <td><%= @sam %></td>
-          </tr>
         </tbody>
       </table>
+    </div>
+    <div class="col-4">
+      <table class="table table-bordered">
+        <tr>
+          <th class="table-secondary">送料</th>
+          <td><%= @orde.shipping_cost %></td>
+        </tr>
+        <tr>
+          <th class="table-secondary">商品合計</th>
+          <td><%= @total_money %></td>
+        </tr>
+        <tr>
+          <th class="table-secondary">請求金額</th>
+          <td><%= @sam %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <P></P>
       <div>
-        <label>支払方法</label>
+        <font size="5" class="mr-5">支払方法</font>
         <%= @orde.payment_i18n %>
       </div>
+      <P></P>
       <div>
-        <label>お届け先</label>
+        <font size="5" class="mr-5">お届け先</font>
         〒<%= @orde.postal_code %>
         <%= @orde.address %>
         <%= @orde.name %>
       </div>
-      <%= form_with model: @orde, url: ordes_path, local:true do |f| %>
-        <%= f.hidden_field :payment, value: @orde.payment %>
-        <%= f.hidden_field :postal_code, value: @orde.postal_code %>
-        <%= f.hidden_field :address, value: @orde.address %>
-        <%= f.hidden_field :name, value: @orde.name %>
-        <%= f.submit "注文を確定する", class: "btn btn-success" %>
-      <% end %>
+      <P></P>
+      <div style="text-align:center;">
+        <%= form_with model: @orde, url: ordes_path, local:true do |f| %>
+          <%= f.hidden_field :payment, value: @orde.payment %>
+          <%= f.hidden_field :postal_code, value: @orde.postal_code %>
+          <%= f.hidden_field :address, value: @orde.address %>
+          <%= f.hidden_field :name, value: @orde.name %>
+          <%= f.submit "注文を確定する", class: "btn btn-success" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

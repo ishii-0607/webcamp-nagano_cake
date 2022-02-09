@@ -22,7 +22,7 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <% if customer_signed_in? %>
-            <font>ようこそ、<%= current_customer.first_name %>さん！</font>
+            <p class="mr-5 pr-5">ようこそ、<%= current_customer.first_name %>さん！</p>
             <li class="nav-item">
               <%= link_to "マイページ", mypage_path, class: 'nav-link text-dark' %>
             </li>

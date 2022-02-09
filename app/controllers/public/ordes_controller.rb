@@ -1,7 +1,9 @@
 class Public::OrdesController < ApplicationController
 
+  before_action :cart_item_check, only: [:confirm, :create, :new]
+
   def index
-    @ordes = Orde.all
+    @ordes = current_customer.ordes.page(params[:page]).reverse_order.per(10)
   end
 
   def show
@@ -18,6 +20,7 @@ class Public::OrdesController < ApplicationController
     @orde = Orde.new(orde_params)
     @sum = 0
     @orde.shipping_cost = 800
+    @orde.customer_id = current_customer.id
     @cart_items = current_customer.cart_items.all
       @cart_items.each do |cart_item|
         @orders_detail = @orde.orders_details.new
@@ -56,6 +59,13 @@ class Public::OrdesController < ApplicationController
 
   def orde_params
     params.require(:orde).permit(:payment, :postal_code, :address, :name)
+  end
+
+  def cart_item_check
+    cart_item = current_customer.cart_items
+    if cart_item.blank?
+      redirect_to items_path
+    end
   end
 
 end

@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="mx-auto">
+    <div class="col-12">
       <table class="table">
-        <h3>会員一覧</h3>
-        <thead>
+        <h3 class="page-tatle">会員一覧</h3>
+        <thead class="table-secondary">
           <tr>
             <th>会員ID</th>
             <th>氏名</th>
@@ -39,3 +39,4 @@
     </div>
   </div>
 </div>
+<%= paginate @customers %>

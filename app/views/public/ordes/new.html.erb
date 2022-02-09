@@ -1,46 +1,53 @@
 <div class="container">
   <div class="row">
-      <div class="mx-auto">
-      <h2>注文情報入力</h2>
+      <div class="col-12">
+      <h3 class="page-tatle">注文情報入力</h3>
       <%= form_with model: @orde, url: ordes_confirm_path, local: true do |f| %>
       <div>
         <label>支払方法</label>
-        <div>
+        <div class="ml-4">
           <%= f.radio_button :payment, "credit_card" %>
           <%= f.label :payment, "クレジットカード" %>
         </div>
-        <div>
+        <div class="ml-4">
           <%= f.radio_button :payment, "transfer" %>
           <%= f.label :payment, "銀行振込" %>
         </div>
       </div>
       <tr>
         <label>お届け先</label>
-        <div>
+        <div class="ml-4">
           <%= f.radio_button :address_method, "address" %>
           <%= f.label :address_method, "ご自身の住所" %>
-          <p><%= @customer.address_customer %></p>
+          <p class="ml-4"><%= @customer.address_customer %></p>
         </div>
       </tr>
-      <div>
+      <div class="ml-4">
         <%= f.radio_button :address_method, "new_address" %>
         <%= f.label :address_method, "新しいお届け先" %>
-        <div>
+        <div class="row ml-4">
           <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
+          <div class="col-1"></div>
           <%= f.text_field :postal_code %>
         </div>
-        <div>
+        <p></p>
+        <div class="row ml-4">
           <%= f.label :address, "住所" %>
-          <%= f.text_field :address %>
+          <div class="col-2 ml-5"></div>
+          <%= f.text_field :address, class: "col-4" %>
         </div>
-        <div>
+        <p></p>
+        <div class="row ml-4">
           <%= f.label :name, "宛名" %>
+          <div class="col-2 ml-5"></div>
           <%= f.text_field :name %>
         </div>
       </div>
-      <tr>
+      <p></p>
+      <div class="row">
+        <div class="col-4 ml-5"></div>
         <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
-      </tr>
+      </div>
       <% end %>
       </div>
   </div>
