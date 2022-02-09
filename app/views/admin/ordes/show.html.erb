@@ -30,14 +30,14 @@
           </tr>
         </thead>
         <tbody>
+          <% @orde.orders_details.each do |detail| %>
           <tr>
-            <% @orde.orders_details.each do |detail| %>
             <td><%= detail.item.name %></td>
             <td><%= detail.item.with_tax_price %></td>
             <td><%= detail.amount %></td>
             <td><%= detail.item.with_tax_price * detail.amount %></td>
-            <% end %>
           </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
